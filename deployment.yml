@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-python
+spec:
+  replicas: 3  # Adjust as needed
+  selector:
+    matchLabels:
+      app: hello-world-python
+  template:
+    metadata:
+      labels:
+        app: hello-world-python
+
+      initContainers:
+        - name: install-requirements
+          image: python:3.9-slim
+          command: ["pip", "install", "-r", "/app/requirements.txt"]
+          volumeMounts:
+            - name: app-volume
+              mountPath: /app
+      containers:
+        - name: hello-world-python
+          image: python:3.9-slim
+          ports:
+            - containerPort: 8080
+          command: ["python", "app.py"]
+      volumes:
+        - name: app-volume
+          configMap:
+            name: app-configmap
