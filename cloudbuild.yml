@@ -1,0 +1,13 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'us-docker.pkg.dev/proud-portfolio-372511/hello-world-python:latest'  # Replace with your desired image name and tag
+      - '.'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-docker.pkg.dev/proud-portfolio-372511/hello-world-python:latest']  # Push with the same tag as the build
+
+images:
+  - 'us-docker.pkg.dev/proud-portfolio-372511/hello-world-python:latest'
