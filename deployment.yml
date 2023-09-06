@@ -14,14 +14,14 @@ spec:
 
       initContainers:
         - name: install-requirements
-          image: python:3.9-slim
+          image: us-docker.pkg.dev/proud-portfolio-372511/hello-world-python:latest
           command: ["pip", "install", "-r", "/app/requirements.txt"]
           volumeMounts:
             - name: app-volume
               mountPath: /app
       containers:
         - name: hello-world-python
-          image: python:3.9-slim
+          image: us-docker.pkg.dev/proud-portfolio-372511/hello-world-python:latest
           ports:
             - containerPort: 8080
           command: ["python", "app.py"]
